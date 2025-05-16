@@ -1,6 +1,9 @@
 <template>
     <div>
-        <Contador/>        
+        <Contador title="Titulo 1" v-bind:value="1+1"/>        
+        <Contador title="Titulo 1" :value="metodo1()"/>        
+        <Contador title="Titulo 1" :value="1"/>    
+
     </div>
 </template>
 
@@ -12,6 +15,18 @@ export default {
 
     components:{
         Contador
+    },
+
+    data() {
+        return{
+            numero: 20,
+        };
+    },
+
+    methods:{
+        metodo1 (){
+            return 2+9;
+        }
     }
 
 }

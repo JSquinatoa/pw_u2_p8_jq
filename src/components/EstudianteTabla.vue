@@ -1,6 +1,10 @@
 <template>
     <div class="container">
 
+        <div v-show="mostrar">
+            <h1>Estudiante Guardado</h1>
+        </div>
+
         <label for="id_nombre">Nombre: </label>
         <input id="id_nombre" type="text" v-model="nuevoNombre">
 
@@ -16,11 +20,31 @@
         <label for="id_telefono">Teléfono: </label>
         <input id="id_telefono" type="text" v-model="nuevoTelefono">
 
-        <button v-on:click="agregarEstudiante()">Agregar Estudiante</button>
-  
-        <ul>
-            <li v-for="{nombre, apellido, edad, genero, telefono} in lista" :key="nombre"> Nombre: {{nombre}} - Apellido: {{apellido}} - edad: {{ edad }} - género: {{ genero }} - teléfono: {{ telefono }}</li>
-        </ul>
+        <button id="boton" v-on:click="agregarEstudiante()">Agregar Estudiante</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Genero</th>
+                    <th>Telefono</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="{nombre, apellido, edad, genero, telefono} in lista" :key="nombre">
+                    <td>{{nombre}}</td>             
+                    <td>{{apellido}}</td>             
+                    <td>{{edad}}</td>             
+                    <td>{{genero}}</td>             
+                    <td>{{telefono}}</td>             
+                    <td id="col_boton"><button>Ver</button></td>             
+                </tr>
+            </tbody>
+        </table>
+
     </div>  
 </template>
 
@@ -41,7 +65,8 @@ export default {
                 {nombre:"Carmen", apellido:"Guerrero", edad:40, genero: "femenino", telefono:"09914562369"},
                 {nombre:"Maria", apellido:"Puetate", edad:40, genero: "femenino", telefono:"0991234785"},
                 {nombre:"Marco", apellido:"Quinatoa", edad:45, genero: "masculino", telefono:"0991985632"},
-            ]
+            ],
+            mostrar: false,
         }
     },
     methods:{
@@ -55,8 +80,13 @@ export default {
             }
             /* this.lista.unshift(nuevo); */
             this.lista.push(nuevo);
+            this.mostrar = true     
             
-        }
+            setTimeout(() => {
+                this.mostrar = false
+            }, 3000); //miliseungods
+            
+        },
     }
 }
 </script>
@@ -87,7 +117,7 @@ input{
     padding: 10px 15px;
 }
 
-button{
+#boton{
     background: #4e91f9;
     color: #fff;
     padding: 12px 20px;
@@ -98,19 +128,35 @@ button{
     width: 400px;
 }
 
-ul{
-    list-style: none;
-    margin-top: 30px;
+table{
+    margin-top: 40px;
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
 }
 
-li{
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    color: #333;
-    font-size: 20px;
+th,
+tr,
+td{
+    border: 1px solid;
     text-transform: capitalize;
+    text-align: left;
+}
+
+th{
+    text-align: center;
+}
+
+td{
+    padding: 3px 25px;
+}
+
+tbody tr:hover{
+    background: #dbd1d1;
+}
+
+thead{
+    background: rgb(216, 211, 211);
 }
 
 </style>

@@ -85,8 +85,17 @@ export default {
             setTimeout(() => {
                 this.mostrar = false
             }, 3000); //miliseungods
+            this.limpiar()
             
         },
+
+        limpiar(){
+            this.nuevoNombre = ''
+            this.nuevoApellido= ''
+            this.nuevaEdad = 0
+            this.nuevoGenero = ''
+            this.nuevoTelefono=''
+        }
     }
 }
 </script>

@@ -1,29 +1,53 @@
 <template>
     <div class="container">
-        <img src="https://yesno.wtf/assets/no/19-2062f4c91189b1f88a9e809c10a5b0f0.gif" alt="No se pudo cargar">  
+        <img v-if="imagen" :src="imagen" alt="No se pudo cargar">  
 
         <div class="container-2"></div>
         <div class="pregunta-container">
             <input v-model="pregunta" type="text" placeholder="Hazme una pregunta...">  
-            <p>Recuerda terminar con un signo de Pregunta <b>{?}</b></p>                      
-            <h2>{{pregunta}}</h2>
-            <h1>{{respuesta}}</h1>
+            <p>Recuerda terminar con un signo de Pregunta <b>{?}</b></p>
+            <div v-if="esValida">
+                <h2>{{pregunta}}</h2>
+                <h1>{{respuesta}}</h1>
+            </div>                      
         </div>   
     </div>  
 </template>
 
 <script>
+import {consultarRespuestaFachada} from "@/clients/YesNoClient.js"
+
 export default {
     data(){
         return{
             pregunta: null,
-            respuesta: null
+            respuesta: null,
+            imagen: null,
+            esValida: false
         }
     },
     watch:{
         pregunta(value, oldValue){
-            console.log("Valor actual: " + value);            
-            console.log("Valor anterior: " + oldValue);            
+            this.esValida = false
+            if (value.includes('?')) {
+                this.esValida=true
+                console.log("Valor actual: " + value);            
+                console.log("Valor anterior: " + oldValue);
+                // Aquí se deberíua consultar el API      
+                this.consumirAPI();               
+            }       
+        }
+    },
+    methods:{
+        async consumirAPI(){
+            this.respuesta = 'Pensadoo....'
+            const resp = await consultarRespuestaFachada();
+            console.log(resp);
+            console.log(resp.answer);
+            console.log(resp.forced);
+            console.log(resp.image);
+            this.respuesta = resp.answer 
+            this.imagen = resp.image     
         }
     }
 

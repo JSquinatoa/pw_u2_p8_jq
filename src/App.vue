@@ -4,7 +4,9 @@
  <!-- <EstudianteView/> -->
  <!-- <EstudianteTablaView/> -->
 <!-- <FormularioLibroView/> -->
-  <PreguntaView/>
+<!--   <PreguntaView/> -->  
+   <ClimaView/>
+
 
 </template>
 
@@ -15,6 +17,7 @@ import EstudianteView from "@/views/EstudianteView.vue"
 import EstudianteTablaView from "@/views/EstudianteTablaView.vue"
 import FormularioLibroView from "@/views/FormularioLibroView.vue"
 import PreguntaView from "@/views/PreguntaView.vue"
+import ClimaView from "@/views/ClimaView.vue"
 export default {
   name: 'App',
   components: {
@@ -23,7 +26,8 @@ export default {
     EstudianteView,
     EstudianteTablaView,
     FormularioLibroView,
-    PreguntaView
+    PreguntaView,
+    ClimaView
   }
 }
 </script>
@@ -35,6 +39,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  
 }
 </style>
